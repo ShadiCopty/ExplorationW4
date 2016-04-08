@@ -1,0 +1,11 @@
+library(ggplot2)
+library(dplyr2)
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+Baltimore <- filter(NEI, fips == "24510")
+syr <- split(Baltimore$Emissions, Baltimore$year)
+z <- sapply(syr, sum)
+
+png('plot2.png')
+plot(names(z), z, main="emission over years", ylab="Emission")
+dev.off()
